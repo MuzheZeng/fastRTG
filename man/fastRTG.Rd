@@ -2,7 +2,7 @@
 % Please edit documentation in R/fastRTG.R
 \name{fastRTG}
 \alias{fastRTG}
-\title{Title}
+\title{Fast Sampling for Random Tensor Graphs}
 \usage{
 fastRTG(X, G, avgDeg = NULL, PoissonEdges = TRUE, returnParameters = FALSE)
 }
@@ -25,13 +25,16 @@ if returnParameters is TRUE, returns a list containing sampled tensor
 as well as the ground truth latent factors X, core tensor G.
 }
 \description{
-Title
+Provide efficient algorithm to sample various random tensor graphs. This
+function allows general low-rank tensor setup in the sense that the core
+tensor can has arbitrary number of modes and different number of latent
+factors in each modes (Tucker Decomposition).
 }
 \examples{
 G = as.tensor(array(rgamma(120,1,1), dim = c(2,3,4,5)))
-X[[1]] = matrix(abs(rnorm(200)),100,2)
-X[[2]] = matrix(rgamma(300,1,1),100,3)
-X[[3]] = matrix(rf(400,3,4),100,4)
-X[[4]] = matrix(1,100, 5)
-sampleTensor <- fastRTG(X, G, avgDeg = 1000, returnParameters = TRUE)
+X[[1]] = matrix(abs(rnorm(20)),100,2)
+X[[2]] = matrix(rgamma(30,1,1),100,3)
+X[[3]] = matrix(rf(40,3,4),100,4)
+X[[4]] = matrix(1,10, 5)
+sampleTensor <- fastRTG(X, G, avgDeg = 10, returnParameters = TRUE)
 }

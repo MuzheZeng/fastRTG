@@ -1,4 +1,9 @@
+#' Fast Sampling for Random Tensor Graphs
 #'
+#' Provide efficient algorithm to sample various random tensor graphs. This
+#' function allows general low-rank tensor setup in the sense that the core
+#' tensor can has arbitrary number of modes and different number of latent
+#' factors in each modes (Tucker Decomposition).
 #'
 #' @param X a list of matrices X_i's. Each X_i is a \eqn{n_i by k_i} matrix.
 #' n_i is the dimension size in the i-th mode. k_i is the number of latent
