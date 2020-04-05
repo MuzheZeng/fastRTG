@@ -1,6 +1,8 @@
 #' Count the edges information of an initial
 #' random tensor graph.
 #'
+#' This function counts
+#'
 #' @param X A list of matrices
 #' @param G The core tensor
 #'
