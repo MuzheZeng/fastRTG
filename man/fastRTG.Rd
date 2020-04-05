@@ -21,8 +21,17 @@ as a 3-mode tensor with same X_1 in all three modes.}
 \item{returnParameters}{return parameter list or not.}
 }
 \value{
-
+if returnParameters is TRUE, returns a list containing sampled tensor
+as well as the ground truth latent factors X, core tensor G.
 }
 \description{
 Title
+}
+\examples{
+G = as.tensor(array(rgamma(120,1,1), dim = c(2,3,4,5)))
+X[[1]] = matrix(abs(rnorm(200)),100,2)
+X[[2]] = matrix(rgamma(300,1,1),100,3)
+X[[3]] = matrix(rf(400,3,4),100,4)
+X[[4]] = matrix(1,100, 5)
+sampleTensor <- fastRTG(X, G, avgDeg = 1000, returnParameters = TRUE)
 }

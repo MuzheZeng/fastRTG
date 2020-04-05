@@ -1,4 +1,4 @@
-#' Title
+#'
 #'
 #' @param X a list of matrices X_i's. Each X_i is a \eqn{n_i by k_i} matrix.
 #' n_i is the dimension size in the i-th mode. k_i is the number of latent
@@ -9,10 +9,18 @@
 #' @param PoissonEdges  boolean indicator. Allow poisson edges if TRUE, otherwise only binary edges.
 #' @param returnParameters  return parameter list or not.
 #'
-#' @return
+#' @return if returnParameters is TRUE, returns a list containing sampled tensor
+#' as well as the ground truth latent factors X, core tensor G.
 #' @export
 #'
 #' @examples
+#' G = as.tensor(array(rgamma(120,1,1), dim = c(2,3,4,5)))
+#' X[[1]] = matrix(abs(rnorm(20)),100,2)
+#' X[[2]] = matrix(rgamma(30,1,1),100,3)
+#' X[[3]] = matrix(rf(40,3,4),100,4)
+#' X[[4]] = matrix(1,10, 5)
+#' sampleTensor <- fastRTG(X, G, avgDeg = 10, returnParameters = TRUE)
+
 fastRTG <- function(X, G, avgDeg = NULL, PoissonEdges = TRUE, returnParameters = FALSE) {
   M = length(attr(G, "modes"))
   if(length(X) == 1) {
