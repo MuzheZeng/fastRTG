@@ -23,7 +23,7 @@ countEdges <- function(X, G) {
   for(i in 1:M){
     Cx[[i]] = diag(colSums(X[[i]]), nrow = ncol(X[[i]]), ncol = ncol(X[[i]]))
   }
-  em = sum(attr(ttl(G, Cx, 1:M),"data"))
+  em = sum(attr(rTensor::ttl(G, Cx, 1:M),"data"))
   avDeg = em/nrow(X[[1]])
   return(c(em, avDeg))
 }

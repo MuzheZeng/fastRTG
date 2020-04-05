@@ -1,5 +1,5 @@
 Package: fastRTG
-Title: What the Package Does (One Line, Title Case)
+Title: Efficiently Sampling Random Tensor Graphs
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Muzhe",
@@ -13,4 +13,6 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.0
 Suggests: 
-    testthat
+    testthat (>= 2.1.0)
+Imports: 
+    rTensor
