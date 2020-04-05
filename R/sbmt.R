@@ -1,5 +1,8 @@
 #' Sampling Stochstic Tensor Block Models.
 #'
+#' Suppose the tensor \eqn{A\in \mathbb{R}^{n_1\times n_2...\times n_m} has expectation structure:
+#' \deqn{\mathbb{E}(A) = [G;Z_1,Z_2,Z_3,...Z_m].}
+#'
 #' @param n
 #' @param Pi
 #' @param G

@@ -16,6 +16,5 @@ countEdges(X, G)
 a 2-dim vector describing average degree
 }
 \description{
-Count the edges information of an initial
-random tensor graph.
+This function counts
 }
