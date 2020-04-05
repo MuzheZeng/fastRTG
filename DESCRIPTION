@@ -2,12 +2,12 @@ Package: fastRTG
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Muzhe",
+           family = "Zeng",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
+           email = "mzeng6@wisc.edu",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: What license it uses
+Description: Efficiently sample various types of large random tensor graphs.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
