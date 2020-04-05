@@ -1,18 +1,20 @@
 #' Sampling Stochstic Tensor Block Models.
 #'
-#' Suppose the tensor \eqn{A\in \mathbb{R}^{n_1\times n_2...\times n_m} has expectation structure:
-#' \deqn{\mathbb{E}(A) = [G;Z_1,Z_2,Z_3,...Z_m].}
+#' Suppose the binary (Poisson) tensor A has expectation structure:
+#' \deqn{E(A) = [G;Z_1,Z_2,Z_3,...Z_m],}
+#' where each row of Z_i's has exactly one non-zero element with value equals to 1.
 #'
-#' @param n
-#' @param Pi
-#' @param G
-#' @param PoissonEdges
-#' @param avgDeg
-#' @param returnParameters
-#' @param parametersOnly
-#' @param ...
 #'
-#' @return
+#' @param n a vector of positive integers specifying the dimensions sizes of each mode.
+#' @param Pi  a vector with same size as the number of clusters specifying the cluster weights.
+#' @param G the core tensor, should be an rTensor tensor type.
+#' @param PoissonEdges  boolean indicator. If TRUE, elements of A allows multiple same edges. IF FALSE, A should be a binary tensor.
+#' @param avgDeg  an integer specifying the expected degree.
+#' @param returnParameters  logical. Return the parameters or not.
+#' @param parametersOnly  logical. Only return the parameters or not.
+#' @param ... other parameters.
+#'
+#' @return A list of three items: The sampled random tensor. The latent factors Zs. The ground truth core tensor G.
 #' @export
 #'
 #' @examples
@@ -42,5 +44,5 @@ sbmt <- function(n, Pi, G, PoissonEdges = FALSE, avgDeg = NULL, returnParameters
   }
 
   if (parametersOnly) return(list(X = list(X), core=G))
-  return(list(tensor=fastRTG(X = list(X),G, avgDeg = avgDeg, PoissonEdges = PoissonEdges, returnParameters = returnParameters, ...),Z=X))
+  return(fastRTG(X = list(X),G, avgDeg = avgDeg, PoissonEdges = PoissonEdges, returnParameters = returnParameters, ...))
 }
