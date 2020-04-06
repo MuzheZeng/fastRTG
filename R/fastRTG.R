@@ -19,10 +19,10 @@
 #' @export
 #'
 #' @examples
-#' G = as.tensor(array(rgamma(120,1,1), dim = c(2,3,4,5)))
-#' X[[1]] = matrix(abs(rnorm(20)),100,2)
-#' X[[2]] = matrix(rgamma(30,1,1),100,3)
-#' X[[3]] = matrix(rf(40,3,4),100,4)
+#' G = rTensor::as.tensor(array(rgamma(120,1,1), dim = c(2,3,4,5)))
+#' X[[1]] = matrix(abs(rnorm(20)),10,2)
+#' X[[2]] = matrix(rgamma(30,1,1),10,3)
+#' X[[3]] = matrix(rf(40,3,4),10,4)
 #' X[[4]] = matrix(1,10, 5)
 #' sampleTensor <- fastRTG(X, G, avgDeg = 10, returnParameters = TRUE)
 
@@ -43,9 +43,6 @@ fastRTG <- function(X, G, avgDeg = NULL, PoissonEdges = TRUE, returnParameters =
     stop("Negative entries found in core tensor.")
   }
 
-  # if (length(simple)>0) if(simple) {
-  #   selfLoops = directed = PoissonEdges = FALSE
-  # }
 
   N = as.numeric(lapply(X, nrow))
   K = G@modes
@@ -60,7 +57,7 @@ fastRTG <- function(X, G, avgDeg = NULL, PoissonEdges = TRUE, returnParameters =
     Cx[[i]] = diag(colSums(X[[i]]), nrow = ncol(X[[i]]), ncol = ncol(X[[i]]))
   }
 
-  Gt = ttl(G, Cx, 1:M)
+  Gt = rTensor::ttl(G, Cx, 1:M)
   m = rpois(n = 1, lambda = sum(Gt@data))
 
   if (m == 0) {
@@ -68,7 +65,7 @@ fastRTG <- function(X, G, avgDeg = NULL, PoissonEdges = TRUE, returnParameters =
     subs = list(rep(1,m), N)
     vals = 0
     dims = N
-    tau = sptensor(subs, vals, dims)
+    tau = tensorr::sptensor(subs, vals, dims)
     if(returnParameters){
       out = list(tnsr = tau, list_mat = X, core = G)
     }
@@ -79,7 +76,7 @@ fastRTG <- function(X, G, avgDeg = NULL, PoissonEdges = TRUE, returnParameters =
   }
 
 
-  tabUVW = attr(as.tensor(array(rmultinom(n=1, size=m, prob=Gt@data), dim=K)), "data")
+  tabUVW = attr(rTensor::as.tensor(array(rmultinom(n=1, size=m, prob=Gt@data), dim=K)), "data")
   cumsumUVW = c(0,as.numeric(cumsum(tabUVW)))
 
   edges = matrix(NA, nrow = m, ncol = M)
@@ -106,7 +103,7 @@ fastRTG <- function(X, G, avgDeg = NULL, PoissonEdges = TRUE, returnParameters =
     subs = list(rep(1,M), N)
     vals = 0
     dims = N
-    tau = sptensor(subs, vals, dims)
+    tau = tensorr::sptensor(subs, vals, dims)
     if(returnParameters){
       out = list(tnsr = tau, list_mat = X, core = G)
     } else{
@@ -122,10 +119,10 @@ fastRTG <- function(X, G, avgDeg = NULL, PoissonEdges = TRUE, returnParameters =
   subs <- as.data.frame(nms)
   vals = elcount
   if (PoissonEdges) {
-    tau = sptensor(subs, vals, N)
+    tau = tensorr::sptensor(subs, vals, N)
   }else {
     vals[vals>1] = 1
-    tau = sptensor(subs, vals, N)
+    tau = tensorr::sptensor(subs, vals, N)
   }
 
   if (returnParameters) {
