@@ -12,7 +12,7 @@ n_i is the dimension size in the i-th mode. k_i is the number of latent
 factors in the i-th mode. If X only has one matrix, the default reads it
 as a 3-mode tensor with same X_1 in all three modes.}
 
-\item{G}{the core tensor. Should not contain negative values.}
+\item{G}{the core tensor represented by a multi-dimensional array. Should not contain negative values.}
 
 \item{avgDeg}{specifies the expected degree.}
 
@@ -31,10 +31,10 @@ tensor can has arbitrary number of modes and different number of latent
 factors in each modes (Tucker Decomposition).
 }
 \examples{
-G = as.tensor(array(rgamma(120,1,1), dim = c(2,3,4,5)))
-X[[1]] = matrix(abs(rnorm(20)),100,2)
-X[[2]] = matrix(rgamma(30,1,1),100,3)
-X[[3]] = matrix(rf(40,3,4),100,4)
+G = array(rgamma(120,1,1), dim = c(2,3,4,5))
+X[[1]] = matrix(abs(rnorm(20)),10,2)
+X[[2]] = matrix(rgamma(30,1,1),10,3)
+X[[3]] = matrix(rf(40,3,4),10,4)
 X[[4]] = matrix(1,10, 5)
 sampleTensor <- fastRTG(X, G, avgDeg = 10, returnParameters = TRUE)
 }

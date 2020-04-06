@@ -9,24 +9,28 @@
 #' n_i is the dimension size in the i-th mode. k_i is the number of latent
 #' factors in the i-th mode. If X only has one matrix, the default reads it
 #' as a 3-mode tensor with same X_1 in all three modes.
-#' @param G the core tensor. Should not contain negative values.
+#' @param G the core tensor represented by a multi-dimensional array. Should not contain negative values.
 #' @param avgDeg  specifies the expected degree.
 #' @param PoissonEdges  boolean indicator. Allow poisson edges if TRUE, otherwise only binary edges.
 #' @param returnParameters  return parameter list or not.
 #'
 #' @return if returnParameters is TRUE, returns a list containing sampled tensor
-#' as well as the ground truth latent factors X, core tensor G.
+#' as well as the ground truth latent factors X, core tensor G. The sampled tensor
+#' is a tensorr::sptensor object. The latent factors is a list of matrices. The core tensor
+#' is a rTensor::Tensor object.
+#'
 #' @export
 #'
 #' @examples
-#' G = rTensor::as.tensor(array(rgamma(120,1,1), dim = c(2,3,4,5)))
+#' G = array(rgamma(120,1,1), dim = c(2,3,4,5))
 #' X[[1]] = matrix(abs(rnorm(20)),10,2)
-#' X[[2]] = matrix(rgamma(30,1,1),10,3)
-#' X[[3]] = matrix(rf(40,3,4),10,4)
-#' X[[4]] = matrix(1,10, 5)
-#' sampleTensor <- fastRTG(X, G, avgDeg = 10, returnParameters = TRUE)
+#' X[[2]] = matrix(rgamma(60,1,1),20,3)
+#' X[[3]] = matrix(rf(120,3,4),30,4)
+#' X[[4]] = matrix(1,40, 5)
+#' sampleTensor <- fastRTG(X, G, sparsity = 0.01, returnParameters = TRUE)
 
-fastRTG <- function(X, G, avgDeg = NULL, PoissonEdges = TRUE, returnParameters = FALSE) {
+fastRTG <- function(X, G, sparsity = NULL, PoissonEdges = TRUE, returnParameters = FALSE) {
+  G = rTensor::as.tensor(G)
   M = length(attr(G, "modes"))
   if(length(X) == 1) {
     X = list(X[[1]], X[[1]], X[[1]])
@@ -47,9 +51,9 @@ fastRTG <- function(X, G, avgDeg = NULL, PoissonEdges = TRUE, returnParameters =
   N = as.numeric(lapply(X, nrow))
   K = G@modes
 
-  if(length(avgDeg)>0) {
+  if(length(sparsity)>0) {
     eDbar = countEdges(X, G)[2]
-    G = G * avgDeg / eDbar
+    G = G * sparsity / eDbar
   }
 
   Cx = list()

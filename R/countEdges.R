@@ -10,6 +10,7 @@
 #' @export
 #'
 #' @examples
+#'
 countEdges <- function(X, G) {
   M = length(attr(G, "modes"))
   if(length(X) == 1) {
@@ -26,6 +27,6 @@ countEdges <- function(X, G) {
     Cx[[i]] = diag(colSums(X[[i]]), nrow = ncol(X[[i]]), ncol = ncol(X[[i]]))
   }
   em = sum(attr(rTensor::ttl(G, Cx, 1:M),"data"))
-  avDeg = em/nrow(X[[1]])
-  return(c(em, avDeg))
+  avgDeg = em/prod(as.numeric(lapply(X, function(a) nrow(a)[1])))
+  return(c(em, avgDeg))
 }
