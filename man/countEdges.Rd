@@ -10,11 +10,19 @@ countEdges(X, G)
 \arguments{
 \item{X}{A list of matrices}
 
-\item{G}{The core tensor}
+\item{G}{The core tensor. A rTensor::Tensor object.}
 }
 \value{
 a 2-dim vector describing average degree
 }
 \description{
 This function counts
+}
+\examples{
+n = 10
+k = 3
+X = matrix(rnorm(n*k),n,k)
+X = list(X,X,X)
+G = rTensor::as.tensor(array(rexp(k^3),dim = rep(k,3)))
+res = countEdges(X, G)
 }

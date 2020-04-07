@@ -6,7 +6,7 @@
 #' @param X A list of matrices
 #' @param G The core tensor. A rTensor::Tensor object.
 #'
-#' @return a 2-dim vector describing average degree
+#' @return a 2-dim vector describing sum of tensor values and average value.
 #' @export
 #'
 #' @examples

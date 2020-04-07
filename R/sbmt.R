@@ -7,7 +7,7 @@
 #'
 #' @param n a vector of positive integers specifying the dimensions sizes of each mode.
 #' @param Pi  a vector with same size as the number of clusters specifying the cluster weights.
-#' @param G the core tensor, should be an rTensor tensor type.
+#' @param G the core tensor in a multi-dimensional array.
 #' @param PoissonEdges  boolean indicator. If TRUE, elements of A allows multiple same edges. IF FALSE, A should be a binary tensor.
 #' @param avgDeg  an integer specifying the expected degree.
 #' @param returnParameters  logical. Return the parameters or not.

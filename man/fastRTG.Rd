@@ -4,7 +4,7 @@
 \alias{fastRTG}
 \title{Fast Sampling for Random Tensor Graphs}
 \usage{
-fastRTG(X, G, avgDeg = NULL, PoissonEdges = TRUE, returnParameters = FALSE)
+fastRTG(X, G, sparsity = NULL, PoissonEdges = TRUE, returnParameters = FALSE)
 }
 \arguments{
 \item{X}{a list of matrices X_i's. Each X_i is a \eqn{n_i by k_i} matrix.
@@ -14,15 +14,17 @@ as a 3-mode tensor with same X_1 in all three modes.}
 
 \item{G}{the core tensor represented by a multi-dimensional array. Should not contain negative values.}
 
-\item{avgDeg}{specifies the expected degree.}
-
 \item{PoissonEdges}{boolean indicator. Allow poisson edges if TRUE, otherwise only binary edges.}
 
 \item{returnParameters}{return parameter list or not.}
+
+\item{avgDeg}{specifies the expected degree.}
 }
 \value{
 if returnParameters is TRUE, returns a list containing sampled tensor
-as well as the ground truth latent factors X, core tensor G.
+as well as the ground truth latent factors X, core tensor G. The sampled tensor
+is a tensorr::sptensor object. The latent factors is a list of matrices. The core tensor
+is a rTensor::Tensor object.
 }
 \description{
 Provide efficient algorithm to sample various random tensor graphs. This
@@ -33,8 +35,8 @@ factors in each modes (Tucker Decomposition).
 \examples{
 G = array(rgamma(120,1,1), dim = c(2,3,4,5))
 X[[1]] = matrix(abs(rnorm(20)),10,2)
-X[[2]] = matrix(rgamma(30,1,1),10,3)
-X[[3]] = matrix(rf(40,3,4),10,4)
-X[[4]] = matrix(1,10, 5)
-sampleTensor <- fastRTG(X, G, avgDeg = 10, returnParameters = TRUE)
+X[[2]] = matrix(rgamma(60,1,1),20,3)
+X[[3]] = matrix(rf(120,3,4),30,4)
+X[[4]] = matrix(1,40, 5)
+sampleTensor <- fastRTG(X, G, sparsity = 0.01, returnParameters = TRUE)
 }
