@@ -4,13 +4,18 @@
 #' This function counts
 #'
 #' @param X A list of matrices
-#' @param G The core tensor
+#' @param G The core tensor. A rTensor::Tensor object.
 #'
 #' @return a 2-dim vector describing average degree
 #' @export
 #'
 #' @examples
-#'
+#' n = 10
+#' k = 3
+#' X = matrix(rnorm(n*k),n,k)
+#' X = list(X,X,X)
+#' G = rTensor::as.tensor(array(rexp(k^3),dim = rep(k,3)))
+#' res = countEdges(X, G)
 countEdges <- function(X, G) {
   M = length(attr(G, "modes"))
   if(length(X) == 1) {
