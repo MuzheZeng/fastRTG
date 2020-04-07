@@ -18,8 +18,13 @@
 #' @export
 #'
 #' @examples
-sbmt <- function(n, Pi, G, PoissonEdges = FALSE, avgDeg = NULL, returnParameters = FALSE, parametersOnly = FALSE, ...) {
+#' n=10
+#' G = array(abs(rnorm(27)),dim = rep(3,3))
+#' Pi = c(0.3,0.3,0.4)
+#' sampleSBM = sbmt(n, Pi, G, sparsity = 0.01)
+sbmt <- function(n, Pi, G, PoissonEdges = FALSE, sparsity = NULL, returnParameters = FALSE, parametersOnly = FALSE, ...) {
   K = length(Pi)
+  G = rTensor::as.tensor(G)
   if (K != dim(G)[1] || length(unique(dim(G))) != 1) {
     stop("Core tensor should be super-diagonal with every dimension match length of Pi!")
   }
@@ -27,22 +32,22 @@ sbmt <- function(n, Pi, G, PoissonEdges = FALSE, avgDeg = NULL, returnParameters
   Z = sort(Z)
   X = model.matrix(~factor(as.character(Z), levels = as.character(1:K)) - 1)
 
-  if (length(avgDeg) == 0) {
-    return(list(tensor=fastRTG(list(X), G, PoissonEdges = PoissonEdges, ...), Z = X))
+  if (length(sparsity) == 0) {
+    return(fastRTG(list(X), G@data, PoissonEdges = PoissonEdges, ...))
   } else {
     eDbar = countEdges(list(X), G)[2]
-    G = G * avgDeg/eDbar
+    G = G * sparsity/eDbar
   }
 
   if (!PoissonEdges) {
     if (max(G@data) >= 1) {
-      warning("This combination of B and avgDeg has led to probabilities that exceed 1.
-              Suggestion:  Either diminish avgDeg or enable poisson edges.")
+      warning("This combination of B and sparsity has led to probabilities that exceed 1.
+              Suggestion:  Either diminish sparsity or enable poisson edges.")
     } else {
       G@data = -log(1-G@data)
     }
   }
 
   if (parametersOnly) return(list(X = list(X), core=G))
-  return(fastRTG(X = list(X),G, avgDeg = avgDeg, PoissonEdges = PoissonEdges, returnParameters = returnParameters, ...))
+  return(fastRTG(X = list(X),G@data, sparsity = sparsity, PoissonEdges = PoissonEdges, returnParameters = returnParameters, ...))
 }
