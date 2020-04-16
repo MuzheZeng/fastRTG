@@ -23,8 +23,8 @@ as a 3-mode tensor with same X_1 in all three modes.}
 \value{
 if returnParameters is TRUE, returns a list containing sampled tensor
 as well as the ground truth latent factors X, core tensor G. The sampled tensor
-is a tensorr::sptensor object. The latent factors is a list of matrices. The core tensor
-is a rTensor::Tensor object.
+is a \code{tensorr::sptensor} object. The latent factors is a list of matrices. The core tensor
+is a \code{rTensor::Tensor} object.
 }
 \description{
 Provide efficient algorithm to sample various random tensor graphs. This

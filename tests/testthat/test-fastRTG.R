@@ -1,5 +1,6 @@
 test_that("sparsity of fastRTG", {
   G = array(rgamma(120,1,1), dim = c(2,3,4,5))
+  X = list()
   X[[1]] = matrix(abs(rnorm(20)),10,2)
   X[[2]] = matrix(rgamma(60,1,1),20,3)
   X[[3]] = matrix(rf(120,3,4),30,4)
@@ -10,6 +11,7 @@ test_that("sparsity of fastRTG", {
 
 test_that("output datatype", {
   G = array(rgamma(24,1,1), dim = c(2,3,4))
+  X = list()
   X[[1]] = matrix(abs(rnorm(20)),10,2)
   X[[2]] = matrix(rgamma(60,1,1),20,3)
   X[[3]] = matrix(rf(120,3,4),30,4)
