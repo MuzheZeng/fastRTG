@@ -17,3 +17,5 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(fastRTG)
 ```
+
+$$\widehat U_c = \frac{1}{\sqrt{1-y^2-\sin\Theta(\widehat U_u,U_u)}}. $$
