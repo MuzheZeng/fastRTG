@@ -8,6 +8,7 @@ Authors@R:
            email = "mzeng6@wisc.edu",
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: Efficiently sample various types of large random tensor graphs.
+    The choices of random graphs include SBM, DC-SBM, Overlapping, Erdos Renyi.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

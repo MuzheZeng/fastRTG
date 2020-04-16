@@ -14,7 +14,7 @@ as a 3-mode tensor with same X_1 in all three modes.}
 
 \item{G}{the core tensor represented by a multi-dimensional array. Should not contain negative values.}
 
-\item{PoissonEdges}{boolean indicator. Allow poisson edges if TRUE, otherwise only binary edges.}
+\item{PoissonEdges}{boolean indicator. Allow poisson edges if \code{TRUE}, otherwise only binary edges.}
 
 \item{returnParameters}{return parameter list or not.}
 

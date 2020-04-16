@@ -9,7 +9,7 @@ sbmt(
   Pi,
   G,
   PoissonEdges = FALSE,
-  avgDeg = NULL,
+  sparsity = NULL,
   returnParameters = FALSE,
   parametersOnly = FALSE,
   ...
@@ -20,17 +20,17 @@ sbmt(
 
 \item{Pi}{a vector with same size as the number of clusters specifying the cluster weights.}
 
-\item{G}{the core tensor, should be an rTensor tensor type.}
+\item{G}{the core tensor in a multi-dimensional array.}
 
 \item{PoissonEdges}{boolean indicator. If TRUE, elements of A allows multiple same edges. IF FALSE, A should be a binary tensor.}
-
-\item{avgDeg}{an integer specifying the expected degree.}
 
 \item{returnParameters}{logical. Return the parameters or not.}
 
 \item{parametersOnly}{logical. Only return the parameters or not.}
 
 \item{...}{other parameters.}
+
+\item{avgDeg}{an integer specifying the expected degree.}
 }
 \value{
 A list of three items: The sampled random tensor. The latent factors Zs. The ground truth core tensor G.
@@ -39,4 +39,10 @@ A list of three items: The sampled random tensor. The latent factors Zs. The gro
 Suppose the binary (Poisson) tensor A has expectation structure:
 \deqn{E(A) = [G;Z_1,Z_2,Z_3,...Z_m],}
 where each row of Z_i's has exactly one non-zero element with value equals to 1.
+}
+\examples{
+n=10
+G = array(abs(rnorm(27)),dim = rep(3,3))
+Pi = c(0.3,0.3,0.4)
+sampleSBM = sbmt(n, Pi, G, sparsity = 0.01)
 }

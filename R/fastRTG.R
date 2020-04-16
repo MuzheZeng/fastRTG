@@ -11,13 +11,13 @@
 #' as a 3-mode tensor with same X_1 in all three modes.
 #' @param G the core tensor represented by a multi-dimensional array. Should not contain negative values.
 #' @param avgDeg  specifies the expected degree.
-#' @param PoissonEdges  boolean indicator. Allow poisson edges if TRUE, otherwise only binary edges.
+#' @param PoissonEdges  boolean indicator. Allow poisson edges if \code{TRUE}, otherwise only binary edges.
 #' @param returnParameters  return parameter list or not.
 #'
 #' @return if returnParameters is TRUE, returns a list containing sampled tensor
 #' as well as the ground truth latent factors X, core tensor G. The sampled tensor
-#' is a tensorr::sptensor object. The latent factors is a list of matrices. The core tensor
-#' is a rTensor::Tensor object.
+#' is a \code{tensorr::sptensor} object. The latent factors is a list of matrices. The core tensor
+#' is a \code{rTensor::Tensor} object.
 #'
 #' @export
 #'

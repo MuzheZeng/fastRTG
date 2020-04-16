@@ -13,7 +13,7 @@ countEdges(X, G)
 \item{G}{The core tensor. A rTensor::Tensor object.}
 }
 \value{
-a 2-dim vector describing average degree
+a 2-dim vector describing sum of tensor values and average value.
 }
 \description{
 This function counts
