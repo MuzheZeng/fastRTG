@@ -18,6 +18,6 @@ test_that("output datatype", {
   sampleTensor <- fastRTG(X, G, sparsity = 0.1, returnParameters = TRUE)
   expect_equal(class(sampleTensor$tnsr)[1], "sptensor")
   expect_equal(class(sampleTensor$core)[1], "Tensor")
-  expect_equal(class(sampleTensor$list_mat)[1] %in% c("list", "matrix"), TRUE)
+  expect_true(class(sampleTensor$list_mat)[1] %in% c("list", "matrix"))
 })
 
