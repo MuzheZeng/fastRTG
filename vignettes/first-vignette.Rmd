@@ -2,8 +2,8 @@
 title: "first-vignette"
 output: rmarkdown::html_vignette
 vignette: >
-  \VignetteIndexEntry{first-vignette}
-  \VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{first-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
   \VignetteEncoding{UTF-8}
 ---
 
